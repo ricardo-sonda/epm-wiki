@@ -15,6 +15,7 @@ if [ "$(cat "$Q/.epm-quartz-version" 2>/dev/null || true)" != "$VERSION" ]; then
 fi
 
 cp "$ROOT/site/quartz.config.ts" "$ROOT/site/quartz.layout.ts" "$Q/"
+cp "$ROOT/site/custom.scss" "$Q/quartz/styles/custom.scss"
 cd "$Q"
 [ -d node_modules ] || npm ci --no-audit --no-fund
 npx quartz build -d "$ROOT/wiki" -o "$ROOT/public" "$@"

@@ -1,0 +1,38 @@
+@use "./base.scss";
+@use "./variables.scss" as *;
+
+// Explorer scroll fix (backport of upstream jackyzha0/quartz#2283, not in v4.5.2).
+// v4.5.2 sets `overscroll-behavior: contain` on *every* <ul> in the Explorer.
+// Nested folder lists also have `overflow: hidden`, which makes them scroll
+// containers, so the wheel stops at them and the Explorer only scrolls while
+// the cursor is over top-level items. Scope containment to the root list only.
+.explorer-content ul {
+  overscroll-behavior: auto;
+
+  &.explorer-ul {
+    overscroll-behavior: contain;
+  }
+}
+
+.mobile-no-scroll {
+  @media all and ($mobile) {
+    overscroll-behavior: auto;
+
+    .explorer-content > .explorer-ul {
+      overscroll-behavior: contain;
+    }
+  }
+}
+
+// Collapsed folders stay in the layout at 0 height; hide them so they
+// can't take focus or catch scroll/hover events (also from upstream).
+.explorer-content .folder-outer {
+  visibility: collapse;
+  transition-property: grid-template-rows, visibility;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in-out;
+
+  &.open {
+    visibility: visible;
+  }
+}
