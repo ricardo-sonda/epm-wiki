@@ -1,3 +1,7 @@
+---
+title: "EPM Wiki"
+---
+
 # Wiki Index
 
 The catalog of all pages in this wiki. Each entry: a wikilink to the page and a one-line summary. The LLM reads this first when answering queries to identify candidate pages.
